@@ -8,7 +8,7 @@
       @end="drag = false"
     >
       <li class="JourneySteps-item" v-for="(step, index) in steps" :key="index">
-        {{ step.label }}
+        <input class="JourneySteps-input" type="text" v-model="step.label" placeholder="Ma step" />
       </li>
     </draggable>
   </ul>
