@@ -1,6 +1,5 @@
 <template>
   <div class="Map">
-    <h1>Hello</h1>
     <journey-list class="Map-list" />
   </div>
 </template>

@@ -39,15 +39,6 @@ export default class JourneyList extends Vue {
         {
           label: "mon label"
         },
-        {
-          label: "test2 label"
-        },
-        {
-          label: "mon label"
-        },
-        {
-          label: "test2 label"
-        }
       ]
     },
     {

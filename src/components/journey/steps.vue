@@ -9,6 +9,7 @@
     >
       <li class="JourneySteps-item" v-for="(step, index) in steps" :key="index">
         <input class="JourneySteps-input" type="text" v-model="step.label" placeholder="Ma step" />
+        <button class="JourneySteps-add" @click="addStep(index)">+</button>
       </li>
     </draggable>
   </ul>
@@ -26,6 +27,13 @@ import draggable from "vuedraggable";
 })
 export default class JourneySteps extends Vue {
   @Prop() private steps!: Array<JourneyStepsInterface>;
+
+  addStep(index = 0) {
+    this.steps.splice(index + 1, 0 , {
+      label: ""
+    });
+    // todo focus to input
+  }
 }
 </script>
 
@@ -40,13 +48,37 @@ export default class JourneySteps extends Vue {
 
   &-item {
     display: inline-table;
-    padding: 0.5rem 1rem;
+    position: relative;
+    padding: 0.5rem 2rem .5rem 1rem;
     border: 1px solid #979797;
     border-top: 1px solid blue;
 
     & + &-item {
       margin-left: 0.5rem;
     }
+
+    &:hover {
+      .JourneySteps-add {
+        display: inline-block;
+      }
+    }
+  }
+
+  &-input {
+    display: block;
+    width: 100%;
+    border: 0;
+    outline: none;
+  }
+
+  &-add {
+    display: none;
+    position: absolute;
+    right: -.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    cursor: pointer;
   }
 }
 </style>

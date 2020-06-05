@@ -7,7 +7,8 @@
       placeholder="Placeholder"
     />
     <journey-steps v-if="journey.steps.length" :steps="journey.steps" />
-    <button @click="addStep" class="JourneyItem-add">+</button>
+    <button v-else class="JourneySteps-add" @click="addStep(index)">Add step</button>
+
   </div>
 </template>
 
