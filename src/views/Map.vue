@@ -1,18 +1,19 @@
 <template>
   <div class="Map">
     <journey-list class="Map-list" />
+    <story-list />
   </div>
 </template>
 
 <script>
-import JourneyList from "@/components/journey/list.vue";
-import Vue from "vue";
-import { Component } from "vue-property-decorator";
+  import JourneyList from "@/components/journey/list.vue";
+  import StoryList from "@/components/story/list.vue";
 
-@Component({
+export default {
   components: {
-    JourneyList
+    JourneyList,
+    StoryList
   }
-})
-export default class Map extends Vue {}
+
+}
 </script>

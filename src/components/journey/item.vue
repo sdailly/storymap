@@ -3,33 +3,42 @@
     <input
       class="JourneyItem-input"
       type="text"
-      :value="journey.label"
+      :value="item.label"
       placeholder="Placeholder"
     />
-    <journey-steps v-if="journey.steps.length" :steps="journey.steps" />
-    <button v-else class="JourneySteps-add" @click="addStep(index)">Add step</button>
-
+    <journey-steps v-if="item.steps.length" :steps="item.steps" />
+    <button v-else class="JourneySteps-add" @click="addStep(index)">
+      Add step
+    </button>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
 import { JourneyInterface } from "@/types";
 import JourneySteps from "@/components/journey/steps.vue";
+import {PropType, reactive} from 'vue';
 
-@Component({
+export default {
   components: {
-    JourneySteps
-  }
-})
-export default class JourneyItem extends Vue {
-  @Prop() private journey!: JourneyInterface;
+    JourneySteps,
+  },
+  props: {
+    journey: Object as PropType<JourneyInterface>
+  },
 
-  addStep() {
-    this.journey.steps.push({
-      label: ""
-    });
-    // todo focus to input
+  setup(props: { journey: JourneyInterface}) {
+    const item = reactive(props.journey);
+    const addStep = () => {
+      item.steps.push({
+        label: ""
+      });
+      // todo focus to input
+    };
+
+    return {
+      addStep,
+      item
+    }
   }
 }
 </script>

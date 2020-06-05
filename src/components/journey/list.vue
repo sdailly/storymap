@@ -1,12 +1,5 @@
 <template>
   <ul class="JourneyList">
-    <draggable
-      class="JourneyList-container"
-      v-model="journeyList"
-      group="journey"
-      @start="drag = true"
-      @end="drag = false"
-    >
       <li
         class="JourneyList-item"
         :key="journey.label"
@@ -15,65 +8,69 @@
         <journey-item :journey="journey" />
         <button class="JourneyList-add" @click="addJourney(index)">+</button>
       </li>
-    </draggable>
   </ul>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
 import JourneyItem from "@/components/journey/item.vue";
 import { JourneyInterface } from "@/types";
-import Draggable from "vuedraggable";
+import {reactive} from 'vue';
 
-@Component({
+export default {
   components: {
     JourneyItem,
-    Draggable
-  }
-})
-export default class JourneyList extends Vue {
-  journeyList = [
-    {
-      label: "test",
-      steps: [
-        {
-          label: "mon label"
-        },
-      ]
-    },
-    {
-      label: "tesssssst",
-      steps: [
-        {
-          label: "hello"
-        },
-        {
-          label: "to"
-        },
-        {
-          label: "you"
-        }
-      ]
-    }
-  ] as Array<JourneyInterface>;
+  },
+  setup() {
+    const journeyList = reactive([
+      {
+        label: "test",
+        steps: [
+          {
+            label: "mon label"
+          }
+        ]
+      },
+      {
+        label: "tesssssst",
+        steps: [
+          {
+            label: "hello"
+          },
+          {
+            label: "to"
+          },
+          {
+            label: "you"
+          }
+        ]
+      }
+    ]) as Array<JourneyInterface>;
 
-  addJourney = (index = 0) => {
-    this.journeyList
-      .splice(index + 1, 0, {
-        label: "",
-        steps: []
-      })
-      .join();
-  };
+    const addJourney = (index = 0) => {
+      journeyList
+              .splice(index + 1, 0, {
+                label: "",
+                steps: []
+              })
+              .join();
+    };
+
+    return {
+      addJourney,
+      journeyList
+    }
+  },
+
+
+
 }
 </script>
 
 <style scoped lang="scss">
 .JourneyList {
-  &-container {
-    display: flex;
-  }
+  display: flex;
   &-item {
+    flex: none;
     padding: 0.5rem;
     list-style: none;
     margin: 0;

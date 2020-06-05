@@ -1,6 +1,6 @@
 export interface JourneyInterface {
   label: string;
-  steps: Array<JourneyStepsInterface>
+  steps: Array<JourneyStepsInterface>;
 }
 
 export interface JourneyStepsInterface {
