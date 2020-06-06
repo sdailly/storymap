@@ -28,10 +28,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import JourneyItem from "@/components/journey/item.vue";
-import { JourneyInterface } from "@/types";
-import Draggable from "vuedraggable";
+import { Component, Vue } from 'vue-property-decorator';
+import JourneyItem from '@/components/journey/item.vue';
+import { JourneyInterface } from '@/types';
+import Draggable from 'vuedraggable';
 import { journeyMockList } from '@/__mocks__/journey';
 
 @Component({
@@ -41,28 +41,32 @@ import { journeyMockList } from '@/__mocks__/journey';
   },
 })
 export default class JourneyList extends Vue {
-  journeyList = journeyMockList || [] as Array<JourneyInterface>;
+  journeyList = journeyMockList || ([] as Array<JourneyInterface>);
 
   addJourney = (index = 0) => {
     this.journeyList
       .splice(index + 1, 0, {
-        label: "",
+        label: '',
         steps: [],
       })
       .join();
   };
 
   addStep = (index = 0) => {
-    this.journeyList[index].steps.push({ label: "", });
+    this.journeyList[index].steps.push({ label: '' });
   };
 }
 </script>
 
 <style scoped lang="scss">
-  .ghost {
-    box-shadow: 0 0 3px rgba(0,0,0,.3);
-  }
+.ghost {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
 .JourneyList {
+  box-shadow: 0 0 2px rgba(#000, 0.5);
+  padding: 0;
+  margin: 0;
   &-container {
     display: flex;
   }
@@ -75,7 +79,7 @@ export default class JourneyList extends Vue {
     transition: width 1s ease;
 
     &:nth-child(even) {
-      background: darken(#fff,3);
+      background: darken(#fff, 3);
     }
 
     &:hover {

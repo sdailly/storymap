@@ -11,9 +11,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { JourneyInterface } from "@/types";
-import JourneySteps from "@/components/journey/steps.vue";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import { JourneyInterface } from '@/types';
+import JourneySteps from '@/components/journey/steps.vue';
 
 @Component({
   components: {
@@ -22,8 +22,6 @@ import JourneySteps from "@/components/journey/steps.vue";
 })
 export default class JourneyItem extends Vue {
   @Prop() private journey!: JourneyInterface;
-
-
 }
 </script>
 
@@ -38,7 +36,7 @@ export default class JourneyItem extends Vue {
     border-left: 2px solid blue;
     margin-bottom: 1rem;
     outline: none;
-    padding: .8rem 1rem;
+    padding: 0.8rem 1rem;
     font-size: 1rem;
   }
 }

@@ -1,14 +1,14 @@
 <template>
   <div class="Map">
-    <h1>Hello</h1>
+    <h1>Story Mapping</h1>
     <journey-list class="Map-list" />
   </div>
 </template>
 
 <script>
-import JourneyList from "@/components/journey/list.vue";
-import Vue from "vue";
-import { Component } from "vue-property-decorator";
+import JourneyList from '@/components/journey/list.vue';
+import Vue from 'vue';
+import { Component } from 'vue-property-decorator';
 
 @Component({
   components: {
