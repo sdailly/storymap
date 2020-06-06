@@ -4,16 +4,24 @@
       class="JourneyList-container"
       v-model="journeyList"
       group="journey"
+      ghost-class="ghost"
       @start="drag = true"
       @end="drag = false"
     >
       <li
         class="JourneyList-item"
-        :key="journey.label"
+        :key="index"
         v-for="(journey, index) in journeyList"
       >
         <journey-item :journey="journey" />
         <button class="JourneyList-add" @click="addJourney(index)">+</button>
+        <button
+          v-if="!journey.steps.length"
+          class="JourneyList-addStep"
+          @click="addStep(index)"
+        >
+          Add step
+        </button>
       </li>
     </draggable>
   </ul>
@@ -24,69 +32,51 @@ import { Component, Vue } from "vue-property-decorator";
 import JourneyItem from "@/components/journey/item.vue";
 import { JourneyInterface } from "@/types";
 import Draggable from "vuedraggable";
+import { journeyMockList } from '@/__mocks__/journey';
 
 @Component({
   components: {
     JourneyItem,
-    Draggable
-  }
+    Draggable,
+  },
 })
 export default class JourneyList extends Vue {
-  journeyList = [
-    {
-      label: "test",
-      steps: [
-        {
-          label: "mon label"
-        },
-        {
-          label: "test2 label"
-        },
-        {
-          label: "mon label"
-        },
-        {
-          label: "test2 label"
-        }
-      ]
-    },
-    {
-      label: "tesssssst",
-      steps: [
-        {
-          label: "hello"
-        },
-        {
-          label: "to"
-        },
-        {
-          label: "you"
-        }
-      ]
-    }
-  ] as Array<JourneyInterface>;
+  journeyList = journeyMockList || [] as Array<JourneyInterface>;
 
   addJourney = (index = 0) => {
     this.journeyList
       .splice(index + 1, 0, {
         label: "",
-        steps: []
+        steps: [],
       })
       .join();
+  };
+
+  addStep = (index = 0) => {
+    this.journeyList[index].steps.push({ label: "", });
   };
 }
 </script>
 
 <style scoped lang="scss">
+  .ghost {
+    box-shadow: 0 0 3px rgba(0,0,0,.3);
+  }
 .JourneyList {
   &-container {
     display: flex;
   }
+
   &-item {
-    padding: 0.5rem;
+    padding: 2rem 0 2rem 2rem;
     list-style: none;
     margin: 0;
     position: relative;
+    transition: width 1s ease;
+
+    &:nth-child(even) {
+      background: darken(#fff,3);
+    }
 
     &:hover {
       .JourneyList-add {
@@ -94,6 +84,7 @@ export default class JourneyList extends Vue {
       }
     }
   }
+
   &-add {
     display: none;
     position: absolute;

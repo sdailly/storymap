@@ -12,8 +12,8 @@ import { Component } from "vue-property-decorator";
 
 @Component({
   components: {
-    JourneyList
-  }
+    JourneyList,
+  },
 })
 export default class Map extends Vue {}
 </script>

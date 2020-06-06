@@ -7,7 +7,6 @@
       placeholder="Placeholder"
     />
     <journey-steps v-if="journey.steps.length" :steps="journey.steps" />
-    <button @click="addStep" class="JourneyItem-add">+</button>
   </div>
 </template>
 
@@ -18,18 +17,13 @@ import JourneySteps from "@/components/journey/steps.vue";
 
 @Component({
   components: {
-    JourneySteps
-  }
+    JourneySteps,
+  },
 })
 export default class JourneyItem extends Vue {
   @Prop() private journey!: JourneyInterface;
 
-  addStep() {
-    this.journey.steps.push({
-      label: ""
-    });
-    // todo focus to input
-  }
+
 }
 </script>
 
@@ -40,24 +34,12 @@ export default class JourneyItem extends Vue {
 
   &-input {
     border: 0;
+    background: none;
     border-left: 2px solid blue;
-    padding-left: 0.5rem;
     margin-bottom: 1rem;
     outline: none;
-  }
-
-  &-add {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 1rem;
-    height: 1rem;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-    background: #fff;
-    border-radius: 100%;
-    border: 0;
-    cursor: pointer;
-    outline: none;
+    padding: .8rem 1rem;
+    font-size: 1rem;
   }
 }
 </style>
